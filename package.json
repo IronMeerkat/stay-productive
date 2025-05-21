@@ -7,7 +7,7 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite.git"
+    "url": "https://github.com/IronMeerkat/stay-productive.git"
   },
   "type": "module",
   "scripts": {
@@ -39,6 +39,7 @@
     "module-manager": "pnpm -F module-manager start"
   },
   "dependencies": {
+    "openai": "^4.101.0",
     "react": "19.0.0",
     "react-dom": "19.0.0"
   },
