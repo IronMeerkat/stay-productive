@@ -43,7 +43,7 @@ const Options = () => {
   const [daysInput, setDaysInput] = useState('0');
   const [hoursInput, setHoursInput] = useState('0');
 
-  const goGithubSite = () => chrome.tabs.create({ url: 'https://github.com/ironmeerkat/stay-productive' });
+  const goGithubSite = () => chrome.tabs.create({ url: 'https://github.com/IronMeerkat/athena-browser-extension' });
 
   const fetchSettings = async () => {
     setLoading(true);
@@ -149,7 +149,7 @@ const Options = () => {
         )}>
         <button onClick={goGithubSite} className="flex items-center gap-2">
           <img src={chrome.runtime.getURL('options/logo_horizontal.svg')} className="h-8" alt="logo" />
-          <span className="text-sm text-gray-500">Stay Productive</span>
+          <span className="text-sm text-gray-500">Athena Browser Extension</span>
         </button>
         {tampered && <span className="text-xs text-red-600">Settings file was tampered; using last valid.</span>}
       </header>
