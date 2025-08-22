@@ -23,7 +23,7 @@
     "postinstall": "pnpm ready"
   },
   "dependencies": {
-    "openai": "workspace:^5.13.1",
+    "openai": "^5.13.1",
     "@extension/contracts": "workspace:*"
   },
   "devDependencies": {

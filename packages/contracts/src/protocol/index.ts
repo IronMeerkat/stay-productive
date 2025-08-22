@@ -1,1 +1,1 @@
-export * from '../../lib/protocol/messages.js';
+export * from './messages.js';

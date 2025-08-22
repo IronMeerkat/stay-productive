@@ -7,7 +7,7 @@ export class OpenAILLMProvider extends BaseLLMProvider {
 
   constructor(apiKey: string | undefined) {
     super();
-    this.client = new OpenAI({ apiKey });
+    this.client = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
   }
 
   async chat(params: LLMChatParams): Promise<{ content: string }> {
