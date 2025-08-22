@@ -2,27 +2,7 @@ import '@src/Options.css';
 import { withErrorBoundary, withSuspense } from '@extension/shared';
 import { cn, ErrorDisplay, LoadingSpinner } from '@extension/ui';
 import { useEffect, useMemo, useState } from 'react';
-
-type TimeRange = { start: string; end: string };
-type DaySchedule = { enabled: boolean; ranges: TimeRange[] };
-type WeeklySchedule = {
-  mon: DaySchedule;
-  tue: DaySchedule;
-  wed: DaySchedule;
-  thu: DaySchedule;
-  fri: DaySchedule;
-  sat: DaySchedule;
-  sun: DaySchedule;
-};
-
-type Settings = {
-  version: number;
-  createdAt: number;
-  schedule: WeeklySchedule;
-  whitelistPatterns: string[];
-  blacklistPatterns: string[];
-  strictMode: { enabled: boolean; expiresAt: number | null };
-};
+import type { Settings, WeeklySchedule } from '@extension/contracts';
 
 const dayOrder: (keyof WeeklySchedule)[] = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 const dayLabel: Record<keyof WeeklySchedule, string> = {

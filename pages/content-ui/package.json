@@ -21,6 +21,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@extension/contracts": "workspace:*",
     "@extension/shared": "workspace:*",
     "@extension/ui": "workspace:*",
     "@extension/i18n": "workspace:*",

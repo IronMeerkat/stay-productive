@@ -145,7 +145,12 @@ const encryptSettings = async (settings: Settings): Promise<EncryptedSettings> =
   const cipherB64 = b64encode(cipher);
 
   const vBuf = new Uint8Array([ENCRYPTION_VERSION]).buffer;
-  const mac = await sign(macKey, [vBuf, te.encode(saltB64), te.encode(ivB64), te.encode(cipherB64)]);
+  const mac = await sign(macKey, [
+    vBuf,
+    te.encode(saltB64).buffer,
+    te.encode(ivB64).buffer,
+    te.encode(cipherB64).buffer,
+  ]);
 
   return {
     v: ENCRYPTION_VERSION,
@@ -163,7 +168,12 @@ const decryptSettings = async (enc: EncryptedSettings): Promise<Settings | null>
     const { aesKey, macKey } = await getDerivedKeys(enc.salt);
     const ok = await verify(
       macKey,
-      [new Uint8Array([enc.v]).buffer, te.encode(enc.salt), te.encode(enc.iv), te.encode(enc.cipherText)],
+      [
+        new Uint8Array([enc.v]).buffer,
+        te.encode(enc.salt).buffer,
+        te.encode(enc.iv).buffer,
+        te.encode(enc.cipherText).buffer,
+      ],
       enc.mac,
     );
     if (!ok) return null;

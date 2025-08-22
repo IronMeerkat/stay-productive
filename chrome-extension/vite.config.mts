@@ -20,6 +20,13 @@ export default defineConfig({
       '@root': rootDir,
       '@src': srcDir,
       '@assets': resolve(srcDir, 'assets'),
+      // Workspace package aliases so Vite/Rollup can resolve workspace imports
+      '@extension/agent-kit': resolve(rootDir, '..', 'packages', 'agent-kit', 'index.mts'),
+      '@extension/contracts': resolve(rootDir, '..', 'packages', 'contracts', 'index.mts'),
+      '@extension/llm': resolve(rootDir, '..', 'packages', 'llm', 'index.mts'),
+      '@extension/env': resolve(rootDir, '..', 'packages', 'env', 'index.mts'),
+      '@extension/shared': resolve(rootDir, '..', 'packages', 'shared', 'index.mts'),
+      '@extension/storage': resolve(rootDir, '..', 'packages', 'storage', 'lib', 'index.ts'),
     },
   },
   plugins: [

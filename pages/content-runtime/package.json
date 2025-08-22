@@ -20,6 +20,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@extension/contracts": "workspace:*",
     "@extension/env": "workspace:*",
     "@extension/ui": "workspace:*"
   },

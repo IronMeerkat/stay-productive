@@ -20,6 +20,9 @@
   },
   "dependencies": {
     "@extension/env": "workspace:*",
+    "@extension/agent-kit": "workspace:*",
+    "@extension/llm": "workspace:*",
+    "@extension/contracts": "workspace:*",
     "@extension/shared": "workspace:*",
     "@extension/storage": "workspace:*",
     "webextension-polyfill": "^0.12.0"
