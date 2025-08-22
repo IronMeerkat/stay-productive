@@ -1,6 +1,8 @@
 import 'webextension-polyfill';
 import { exampleThemeStorage } from '@extension/storage';
 import { isDistraction, evaluateAppeal, type AppealTurn } from '../services/openai';
+import { getRegistry, handleMessage } from './orchestrator';
+import { EchoAgent, SummarizeTitleAgent } from './agents';
 import {
   compileRegexList,
   enableStrictMode,
@@ -18,6 +20,15 @@ exampleThemeStorage.get().then(theme => {
 
 console.log('Background loaded');
 console.log("Edit 'chrome-extension/src/background/index.ts' and save to reload.");
+
+// Register sample agents once on startup
+try {
+  const registry = getRegistry();
+  registry.register(new EchoAgent());
+  registry.register(new SummarizeTitleAgent());
+} catch {
+  // ignore
+}
 
 type CurrentDOMDataType = {
   url: string;
@@ -223,6 +234,25 @@ const processCapturedDOM = async (data: CurrentDOMDataType, tabId: number) => {
 
 // Listen for messages from content script
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // Agent invocation path (typed handler)
+  if (
+    message &&
+    typeof message === 'object' &&
+    'type' in message &&
+    (message as { type: string }).type === 'agent:invoke'
+  ) {
+    void (async () => {
+      const res = await handleMessage(message as { type: 'agent:invoke'; payload: { agent: string; input: unknown } }, {
+        tabId: sender.tab?.id,
+        env: process.env.NODE_ENV === 'development' ? 'development' : 'production',
+      });
+      if (res) {
+        sendResponse(res);
+      }
+    })();
+    return true; // keep the message channel open for async response
+  }
+  // fall through for existing handlers
   // Handle DOM capture (sync ack)
   if (message.type === 'DOM_CAPTURED') {
     currentDOMData = message.payload;
