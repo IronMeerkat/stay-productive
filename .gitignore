@@ -25,3 +25,4 @@ tsconfig.tsbuildinfo
 **/tailwind-output.css
 .vscode/settings.json
 **/.vscode/**
+pnpm-lock.yaml

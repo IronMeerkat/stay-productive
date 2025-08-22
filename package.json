@@ -38,7 +38,7 @@
     "postinstall": "pnpm copy-env"
   },
   "dependencies": {
-    "openai": "^4.101.0",
+    "openai": "^5.13.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
